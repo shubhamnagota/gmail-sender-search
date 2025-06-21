@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			body {
+				width: 300px;
+				padding: 16px;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				margin: 0;
+			}
+
+			.header {
+				display: flex;
+				align-items: center;
+				margin-bottom: 16px;
+			}
+
+			.header img {
+				width: 24px;
+				height: 24px;
+				margin-right: 8px;
+			}
+
+			.header h2 {
+				margin: 0;
+				font-size: 16px;
+				color: #333;
+			}
+
+			.sender-info {
+				background: #f8f9fa;
+				padding: 12px;
+				border-radius: 8px;
+				margin-bottom: 16px;
+				border-left: 4px solid #4285f4;
+			}
+
+			.sender-email {
+				font-weight: 600;
+				color: #333;
+				margin-bottom: 4px;
+			}
+
+			.sender-name {
+				color: #666;
+				font-size: 14px;
+			}
+
+			.domain-btn {
+				background: #34a853;
+				color: white;
+				border: 1px solid #2d8f47;
+			}
+
+			.domain-btn:hover {
+				background: #2d8f47;
+			}
+
+			.actions {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+
+			.button-group {
+				display: flex;
+				gap: 6px;
+			}
+
+			.button-group button {
+				flex: 1;
+				font-size: 12px;
+				padding: 8px 12px;
+			}
+
+			button {
+				background: #4285f4;
+				color: white;
+				border: none;
+				padding: 10px 16px;
+				border-radius: 6px;
+				cursor: pointer;
+				font-size: 14px;
+				transition: background-color 0.2s;
+			}
+
+			button:hover {
+				background: #3367d6;
+			}
+
+			button:disabled {
+				background: #ccc;
+				cursor: not-allowed;
+			}
+
+			.secondary-btn {
+				background: #f8f9fa;
+				color: #5f6368;
+				border: 1px solid #dadce0;
+			}
+
+			.secondary-btn:hover {
+				background: #f1f3f4;
+			}
+
+			.error {
+				color: #d93025;
+				font-size: 12px;
+				margin-top: 8px;
+				padding: 8px;
+				background: #fce8e6;
+				border-radius: 4px;
+			}
+
+			.loading {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #666;
+				font-size: 14px;
+				padding: 20px;
+			}
+
+			.spinner {
+				width: 16px;
+				height: 16px;
+				border: 2px solid #f3f3f3;
+				border-top: 2px solid #4285f4;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				margin-right: 8px;
+			}
+
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<img
+				src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDRINEMyLjkgNCAyIDQuOSAyIDZWMThDMiAxOS4xIDIuOSAyMCA0IDIwSDIwQzIxLjEgMjAgMjIgMTkuMSAyMiAxOFY2QzIyIDQuOSAyMS4xIDQgMjAgNFpNMjAgNkwyMCA3TDEyIDEyTDQgN1Y2TDEyIDExTDIwIDZaIiBmaWxsPSIjNDI4NWY0Ii8+Cjwvc3ZnPgo="
+				alt="Gmail"
+			/>
+			<h2>Gmail Sender Search</h2>
+		</div>
+
+		<div id="loading" class="loading" style="display: none">
+			<div class="spinner"></div>
+			Getting sender info...
+		</div>
+
+		<div id="content" style="display: none">
+			<div class="sender-info">
+				<div class="sender-email" id="senderEmail"></div>
+				<div class="sender-name" id="senderName"></div>
+			</div>
+
+			<div class="actions">
+				<button id="searchBtn">Search All Emails from This Sender</button>
+				<button id="searchDomainBtn" class="domain-btn">Search All Emails from Domain</button>
+				<div class="button-group">
+					<button id="searchUnreadBtn" class="secondary-btn">Unread Only</button>
+					<button id="searchDomainUnreadBtn" class="secondary-btn">Domain Unread</button>
+				</div>
+			</div>
+
+			<div id="domainInfo" class="sender-info" style="display: none; margin-top: 12px; border-left-color: #34a853">
+				<div class="sender-email" id="domainName"></div>
+				<div class="sender-name">Domain search will find all emails from this domain</div>
+			</div>
+		</div>
+
+		<div id="error" class="error" style="display: none"></div>
+
+		<script src="popup.js"></script>
+	</body>
+</html>
